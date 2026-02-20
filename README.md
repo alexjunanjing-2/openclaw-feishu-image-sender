@@ -8,21 +8,41 @@
 
 ### 1. 准备图片文件
 
-将图片文件放到 workspace 目录：
-```
-/Users/bytedance/.openclaw/workspace/
-```
+图片可以放在任何位置，使用绝对路径即可。
 
-### 3. 发送图片
+**建议位置：**
+- `~/.openclaw/workspace/` - 方便管理 OpenClaw 相关文件
+- `~/Pictures/` - 系统图片目录
+- `~/Downloads/` - 下载的图片
+- 任何自定义路径
 
-在 OpenClaw 中使用 `message` 工具发送：
+### 2. 发送图片
+
+在 OpenClaw 中使用 `message` 工具发送，提供图片的绝对路径：
 
 ```javascript
+// 示例 1: 图片在 workspace 目录
 message({
   action: "send",
   channel: "feishu",
   message: "图片说明文字",
-  media: "/Users/bytedance/.openclaw/workspace/test13.png"
+  media: "/Users/username/.openclaw/workspace/test13.png"
+})
+
+// 示例 2: 图片在 Pictures 目录
+message({
+  action: "send",
+  channel: "feishu",
+  message: "图片说明文字",
+  media: "/Users/username/Pictures/photo.jpg"
+})
+
+// 示例 3: 图片在 Downloads 目录
+message({
+  action: "send",
+  channel: "feishu",
+  message: "图片说明文字",
+  media: "/Users/username/Downloads/screenshot.png"
 })
 ```
 
@@ -40,8 +60,13 @@ feishu-image-sender/
 ### 检查图片文件
 
 ```bash
-cd /Users/bytedance/.openclaw/workspace/skills/feishu-image-sender
+# 方式 1: 检查 workspace 目录中的图片
+cd ~/.openclaw/workspace/skills/feishu-image-sender
 ./send-image.sh test13.png "这是测试图片"
+
+# 方式 2: 检查其他目录中的图片（使用绝对路径）
+cd ~/.openclaw/workspace/skills/feishu-image-sender
+./send-image.sh /Users/username/Pictures/photo.jpg "这是照片"
 ```
 
 脚本会：
@@ -63,9 +88,9 @@ cd /Users/bytedance/.openclaw/workspace/skills/feishu-image-sender
 **错误信息：** `图片文件不存在`
 
 **解决方法：**
-1. 检查文件路径是否正确
-2. 确保文件在 workspace 目录
-3. 使用 `find` 命令查找文件
+1. 检查文件路径是否正确（使用绝对路径）
+2. 使用 `find` 命令查找文件
+3. 确认文件确实存在于指定路径
 
 ### 格式不支持
 
@@ -80,6 +105,7 @@ cd /Users/bytedance/.openclaw/workspace/skills/feishu-image-sender
 ### 批量发送图片
 
 ```javascript
+// 方式 1: 发送 workspace 目录中的图片
 const images = ["test13.png", "test14.png", "test15.png"];
 
 for (const img of images) {
@@ -87,7 +113,23 @@ for (const img of images) {
     action: "send",
     channel: "feishu",
     message: `发送图片：${img}`,
-    media: `/Users/bytedance/.openclaw/workspace/${img}`
+    media: `/Users/username/.openclaw/workspace/${img}`
+  });
+}
+
+// 方式 2: 发送不同目录中的图片
+const imagePaths = [
+  "/Users/username/Pictures/photo1.jpg",
+  "/Users/username/Pictures/photo2.jpg",
+  "/Users/username/Downloads/screenshot.png"
+];
+
+for (const path of imagePaths) {
+  message({
+    action: "send",
+    channel: "feishu",
+    message: `发送图片：${path}`,
+    media: path
   });
 }
 ```
@@ -95,8 +137,14 @@ for (const img of images) {
 ### 查找所有图片
 
 ```bash
-find /Users/bytedance/.openclaw/workspace -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \)
-)
+# 在 workspace 目录查找
+find ~/.openclaw/workspace -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \)
+
+# 在 Pictures 目录查找
+find ~/Pictures -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \)
+
+# 在 Downloads 目录查找
+find ~/Downloads -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \)
 ```
 
 ## 📝 维护记录
