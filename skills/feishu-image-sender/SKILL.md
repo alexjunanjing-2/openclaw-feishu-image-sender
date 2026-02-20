@@ -26,7 +26,8 @@ description: |
 ## 前置条件
 
 1. **图片文件**
-   - 图片必须保存在 workspace 目录：`~/.openclaw/workspace/`
+   - 图片可以放在任何位置，使用绝对路径即可
+   - 建议放在 `~/.openclaw/workspace/` 方便管理（可选）
    - 支持格式：jpg, png, gif, webp
 
 ## 使用步骤
@@ -34,20 +35,40 @@ description: |
 ### 1. 检查图片文件
 
 ```bash
-# 查找图片文件
+# 在 workspace 目录查找
 find ~/.openclaw/workspace -name "图片名.png" -type f
+
+# 或者在其他目录查找
+find /path/to/your/directory -name "图片名.png" -type f
 ```
 
 ### 2. 发送图片到飞书
 
-使用 `message` 工具发送图片：
+使用 `message` 工具发送图片，提供图片的绝对路径：
 
 ```javascript
+// 方式 1: 图片在 workspace 目录
 message({
   action: "send",
   channel: "feishu",
   message: "图片说明文字",
-  media: "~/.openclaw/workspace/图片名.png"
+  media: "/absolute/path/to/image.png"
+})
+
+// 方式 2: 图片在 Pictures 目录
+message({
+  action: "send",
+  channel: "feishu",
+  message: "图片说明文字",
+  media: "/Users/username/Pictures/image.png"
+})
+
+// 方式 3: 图片在 Downloads 目录
+message({
+  action: "send",
+  channel: "feishu",
+  message: "图片说明文字",
+  media: "/Users/username/Downloads/image.jpg"
 })
 ```
 
@@ -68,26 +89,59 @@ A: 循环调用 message 工具，每次发送一张图片。
 ### 发送单张图片
 
 ```javascript
-// 发送 test13.png
+// 示例 1: 图片在 workspace 目录
 message({
   action: "send",
   channel: "feishu",
   message: "这是 test13.png",
-  media: "~/.openclaw/workspace/test13.png"
+  media: "/Users/username/.openclaw/workspace/test13.png"
+})
+
+// 示例 2: 图片在 Pictures 目录
+message({
+  action: "send",
+  channel: "feishu",
+  message: "这是截图",
+  media: "/Users/username/Pictures/screenshot.png"
+})
+
+// 示例 3: 图片在项目目录
+message({
+  action: "send",
+  channel: "feishu",
+  message: "这是项目图片",
+  media: "/path/to/project/assets/logo.png"
 })
 ```
 
 ### 批量发送图片
 
 ```javascript
+// 方式 1: 发送 workspace 目录中的图片
 const images = ["test13.png", "test14.png", "test15.png"];
 
 for (const img of images) {
-  const message({
+  message({
     action: "send",
     channel: "feishu",
     message: `发送图片：${img}`,
-    media: `~/.openclaw/workspace/${img}`
+    media: `/Users/username/.openclaw/workspace/${img}`
+  });
+}
+
+// 方式 2: 发送其他目录中的图片
+const imagePaths = [
+  "/Users/username/Pictures/photo1.jpg",
+  "/Users/username/Pictures/photo2.jpg",
+  "/Users/username/Downloads/screenshot.png"
+];
+
+for (const path of imagePaths) {
+  message({
+    action: "send",
+    channel: "feishu",
+    message: `发送图片：${path}`,
+    media: path
   });
 }
 ```
