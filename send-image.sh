@@ -6,7 +6,7 @@
 set -e
 
 # 配置
-WORKSPACE="${OPENCLAW_WORKSPACE:-$HOME/.openclaw/workspace}"
+WORKSPACE="/Users/bytedance/.openclaw/workspace"
 IMAGE_NAME="$1"
 MESSAGE="${2:-发送图片}"
 
@@ -14,10 +14,7 @@ MESSAGE="${2:-发送图片}"
 if [ -z "$IMAGE_NAME" ]; then
     echo "❌ 错误：请提供图片文件名"
     echo "用法: $0 <图片文件名> [说明文字]"
-    echo "示例: $0 test.png '这是测试图片'"
-    echo ""
-    echo "环境变量 OPENCLAW_WORKSPACE 可设置 workspace 路径"
-    echo "默认: $HOME/.openclaw/workspace"
+    echo "示例: $0 test13.png '这是测试图片'"
     exit 1
 fi
 
@@ -28,7 +25,6 @@ IMAGE_PATH="$WORKSPACE/$IMAGE_NAME"
 if [ ! -f "$IMAGE_PATH" ]; then
     echo "❌ 错误：图片文件不存在"
     echo "路径: $IMAGE_PATH"
-    echo "Workspace: $WORKSPACE"
     echo ""
     echo "可用的图片文件："
     find "$WORKSPACE" -maxdepth 1 -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \) | while read -r file; do

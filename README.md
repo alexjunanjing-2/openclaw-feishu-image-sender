@@ -2,19 +2,15 @@
 
 ## 📸 飞书图片发送工具
 
-这个 skill 用于在飞书中发送图片消息，并处理相关的权限和文件管理。
+这个 skill 用于在飞书中发送图片消息，并处理相关的文件管理。
 
 ## 🚀 快速开始
 
-### 1. 确保飞书权限已授权
-
-如果遇到权限错误，请访问飞书开放平台授权所需的权限。
-
-### 2. 准备图片文件
+### 1. 准备图片文件
 
 将图片文件放到 workspace 目录：
 ```
-~/.openclaw/workspace/
+/Users/bytedance/.openclaw/workspace/
 ```
 
 ### 3. 发送图片
@@ -26,7 +22,7 @@ message({
   action: "send",
   channel: "feishu",
   message: "图片说明文字",
-  media: "/path/to/workspace/test.png"
+  media: "/Users/bytedance/.openclaw/workspace/test13.png"
 })
 ```
 
@@ -44,8 +40,8 @@ feishu-image-sender/
 ### 检查图片文件
 
 ```bash
-cd ~/.openclaw/workspace/skills/feishu-image-sender
-./send-image.sh test.png "这是测试图片"
+cd /Users/bytedance/.openclaw/workspace/skills/feishu-image-sender
+./send-image.sh test13.png "这是测试图片"
 ```
 
 脚本会：
@@ -61,15 +57,6 @@ cd ~/.openclaw/workspace/skills/feishu-image-sender
 - WebP
 
 ## ⚠️ 常见问题
-
-### 权限错误
-
-**错误信息：** `permission-error`
-
-**解决方法：**
-1. 访问权限授权链接
-2. 让管理员授权
-3. 重试发送
 
 ### 文件不存在
 
@@ -93,14 +80,14 @@ cd ~/.openclaw/workspace/skills/feishu-image-sender
 ### 批量发送图片
 
 ```javascript
-const images = ["test1.png", "test2.png", "test3.png"];
+const images = ["test13.png", "test14.png", "test15.png"];
 
 for (const img of images) {
   message({
     action: "send",
     channel: "feishu",
     message: `发送图片：${img}`,
-    media: `/path/to/workspace/${img}`
+    media: `/Users/bytedance/.openclaw/workspace/${img}`
   });
 }
 ```
@@ -108,7 +95,8 @@ for (const img of images) {
 ### 查找所有图片
 
 ```bash
-find ~/.openclaw/workspace -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \)
+find /Users/bytedance/.openclaw/workspace -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \)
+)
 ```
 
 ## 📝 维护记录
