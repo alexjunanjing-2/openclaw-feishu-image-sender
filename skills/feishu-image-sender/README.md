@@ -10,10 +10,10 @@
 
 将图片文件放到 workspace 目录：
 ```
-/Users/bytedance/.openclaw/workspace/
+~/.openclaw/workspace/
 ```
 
-### 3. 发送图片
+### 2. 发送图片
 
 在 OpenClaw 中使用 `message` 工具发送：
 
@@ -22,7 +22,7 @@ message({
   action: "send",
   channel: "feishu",
   message: "图片说明文字",
-  media: "/Users/bytedance/.openclaw/workspace/test13.png"
+  media: "~/.openclaw/workspace/test13.png"
 })
 ```
 
@@ -40,7 +40,7 @@ feishu-image-sender/
 ### 检查图片文件
 
 ```bash
-cd /Users/bytedance/.openclaw/workspace/skills/feishu-image-sender
+cd ~/.openclaw/workspace/skills/feishu-image-sender
 ./send-image.sh test13.png "这是测试图片"
 ```
 
@@ -87,7 +87,7 @@ for (const img of images) {
     action: "send",
     channel: "feishu",
     message: `发送图片：${img}`,
-    media: `/Users/bytedance/.openclaw/workspace/${img}`
+    media: `~/.openclaw/workspace/${img}`
   });
 }
 ```
@@ -95,8 +95,7 @@ for (const img of images) {
 ### 查找所有图片
 
 ```bash
-find /Users/bytedance/.openclaw/workspace -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \)
-)
+find ~/.openclaw/workspace -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \)
 ```
 
 ## 📝 维护记录

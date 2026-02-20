@@ -6,7 +6,7 @@
 set -e
 
 # 配置
-WORKSPACE="/Users/bytedance/.openclaw/workspace"
+WORKSPACE="${OPENCLAW_WORKSPACE:-$HOME/.openclaw/workspace}"
 IMAGE_NAME="$1"
 MESSAGE="${2:-发送图片}"
 

@@ -26,7 +26,7 @@ description: |
 ## 前置条件
 
 1. **图片文件**
-   - 图片必须保存在 workspace 目录：`/Users/bytedance/.openclaw/workspace/`
+   - 图片必须保存在 workspace 目录：`~/.openclaw/workspace/`
    - 支持格式：jpg, png, gif, webp
 
 ## 使用步骤
@@ -35,7 +35,7 @@ description: |
 
 ```bash
 # 查找图片文件
-find /Users/bytedance/.openclaw/workspace -name "图片名.png" -type f
+find ~/.openclaw/workspace -name "图片名.png" -type f
 ```
 
 ### 2. 发送图片到飞书
@@ -47,7 +47,7 @@ message({
   action: "send",
   channel: "feishu",
   message: "图片说明文字",
-  media: "/Users/bytedance/.openclaw/workspace/图片名.png"
+  media: "~/.openclaw/workspace/图片名.png"
 })
 ```
 
@@ -73,7 +73,7 @@ message({
   action: "send",
   channel: "feishu",
   message: "这是 test13.png",
-  media: "/Users/bytedance/.openclaw/workspace/test13.png"
+  media: "~/.openclaw/workspace/test13.png"
 })
 ```
 
@@ -87,7 +87,7 @@ for (const img of images) {
     action: "send",
     channel: "feishu",
     message: `发送图片：${img}`,
-    media: `/Users/bytedance/.openclaw/workspace/${img}`
+    media: `~/.openclaw/workspace/${img}`
   });
 }
 ```
